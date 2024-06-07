@@ -2,7 +2,6 @@
     --orange: #FF6600;
 }
 
-
 * {
     padding: 0;
     margin: 0;
@@ -28,13 +27,13 @@ nav {
 nav img {
     max-height: 50px;
     width: auto;
-    margin-left: 120px;
+    margin-left: 150px;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    margin-right: 120px;
+    margin-right: 150px;
 }
 
 nav li {
@@ -97,9 +96,12 @@ nav a:hover::before {
 
 .post {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 100px;
+    margin: 20px 150px;
+    /* background-color: wheat; */
+    /* border: 1px solid silver; */
 }
 
 .post-header {
@@ -120,7 +122,47 @@ nav a:hover::before {
     border: 1px solid silver;
     border-radius: 20px;
     cursor: pointer;
-    position: relative;
-    margin-right: 20px;
     margin-left: 10px;
+}
+
+.post-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 50px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.card {
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    width: 22rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.image-container {
+    overflow: hidden;
+    width: 100%;
+    height: 250px;
+    background-color: rgb(183, 183, 183);
+    border-radius: 1rem 1rem 0 0;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-text {
+    padding: 1.5rem;
+}
+
+.card-text :first-child {
+    margin-bottom: 10px;
+    opacity: 0.8;
 }
