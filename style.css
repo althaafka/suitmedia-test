@@ -94,3 +94,33 @@ nav a:hover::before {
 .banner p {
     font-size: 1.25rem;
 }
+
+.post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 100px;
+}
+
+.post-header {
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.post-header select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 130px;
+    padding: 10px 20px;
+    font-size: large;
+    border: 1px solid silver;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 20px;
+    margin-left: 10px;
+}
