@@ -62,9 +62,11 @@
         <div class="post-pagination">
             <ul class="pagination">
                 <li><a href="" @click="setCurrentPage(1)">«</a></li>
+                <li><a href="" @click="setCurrentPage(currentPage-1)">‹</a></li>
                 <li v-for="page in pages" :key="page">
                     <a href="" @click="setCurrentPage(page)" :class="{ 'active': page == currentPage }">{{ page }}</a>
                 </li>
+                <li><a href="" @click="setCurrentPage(currentPage+1)">›</a></li>
                 <li><a href="" @click="setCurrentPage(Math.ceil(totalPages / perPage))">»</span></a></li>
             </ul>
         </div>

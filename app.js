@@ -3,8 +3,29 @@ document.addEventListener('scroll', function() {
     var bannerImage = document.querySelector('.banner img');
     var bannerText = document.querySelector('.banner-text');
 
-    bannerImage.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
-    bannerText.style.transform = 'translate(-50%, -50%) translateX('+ (-220 * scrollPosition / 100)+  '%) translateY(' + scrollPosition*0.75 + 'px)';
+    bannerImage.style.transform = 'translateY(' + scrollPosition * 0.7 + 'px)';
+    bannerText.style.transform = 'translate(-50%, -50%) translateX('+ (-360 * scrollPosition / 100)+  '%) translateY(' + scrollPosition*0.9 + 'px)';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    let lastScrollTop = 0;
+    window.addEventListener("scroll", function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop) {
+            document.querySelector("nav").style.top = "-90px";
+            document.querySelector("nav").style.opacity = "0";
+        } else {
+            document.querySelector("nav").style.top = "0";
+            document.querySelector("nav").style.opacity = "0.8";
+        }
+
+        if (scrollTop === 0) {
+            document.querySelector("nav").style.opacity = "1";
+        }
+
+        lastScrollTop = scrollTop > 0? scrollTop: 0;
+    });
 });
 
 const { createApp, onMounted, reactive, ref, watch, computed } = Vue;
@@ -33,20 +54,18 @@ const App = {
         const posts = ref([])
         const lastItem = ref(0)
 
-        const paginationLength = 5; // This defines how many pagination links to display at once
+        const paginationLength = 5;
 
         const pages = computed(() => {
             const totalPage = Math.ceil(totalItems.value / perPage.value);
             let start = currentPage.value - Math.floor(paginationLength / 2);
             let end = start + paginationLength - 1;
         
-            // Adjust if the start is less than 1
             if (start < 1) {
                 start = 1;
                 end = Math.min(totalPage, paginationLength);
             }
         
-            // Adjust if the end is more than totalPage
             if (end > totalPage) {
                 end = totalPage;
                 start = Math.max(1, end - paginationLength + 1);
@@ -55,6 +74,7 @@ const App = {
             return Array.from({ length: (end - start + 1) }, (_, i) => start + i);
         });
         
+
         const saveState = () => {
             const state = {
                 currentPage: currentPage.value,
@@ -82,6 +102,10 @@ const App = {
         };
         
         const getPosts = () => {
+            if (currentPage.value < 1) {
+                currentPage.value = 1;
+            }
+
             const xhr = new XMLHttpRequest();
 
         const apiURL = `https://suitmedia-backend.suitdev.com/api/ideas?page[number]=${currentPage.value}&page[size]=${perPage.value}&append[]=small_image&append[]=medium_image&sort=${sortBy.value =="newest"?"-":""}published_at`
@@ -124,8 +148,7 @@ const App = {
         }
 
         const setCurrentPage = (page) => {
-            if (page < 1 || page > totalItems.value) return;
-            console.log("current page: ", currentPage.value)
+            if (page < 1 || page > Math.ceil(totalItems.value/ perPage.value)) return;
             currentPage.value = page;
         }
         
