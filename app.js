@@ -74,31 +74,23 @@ const App = {
             return Array.from({ length: (end - start + 1) }, (_, i) => start + i);
         });
         
-
-        const saveState = () => {
-            const state = {
-                currentPage: currentPage.value,
-                perPage: perPage.value,
-                sortBy: sortBy.value
-            };
-            sessionStorage.setItem('appState', JSON.stringify(state));
-            console.log(sessionStorage.getItem('appState'))
+        const updateURL = () => {
+            const url = new URL(window.location);
+            url.searchParams.set('page', currentPage.value);
+            url.searchParams.set('perPage', perPage.value);
+            url.searchParams.set('sortBy', sortBy.value);
+            history.pushState({}, '', url);
         };
-    
-        const loadState = () => {
-            const savedState = sessionStorage.getItem('appState');
-            if (savedState) {
-                const state = JSON.parse(savedState);
-                currentPage.value = state.currentPage || 1;
-                perPage.value = state.perPage || 10;
-                sortBy.value = state.sortBy || 'newest';
-            } else {
-                currentPage.value = 1;
-                perPage.value = 10;
-                sortBy.value = "newest";
-                saveState(); 
-            }
-            console.log("Loaded state: ", savedState);
+
+        const loadStateFromURL = () => {
+            const url = new URL(window.location);
+            const page = url.searchParams.get('page');
+            const perPageParam = url.searchParams.get('perPage');
+            const sortByParam = url.searchParams.get('sortBy');
+        
+            currentPage.value = page ? parseInt(page) : 1;
+            perPage.value = perPageParam ? parseInt(perPageParam) : 10;
+            sortBy.value = sortByParam || 'newest';
         };
         
         const getPosts = () => {
@@ -154,12 +146,13 @@ const App = {
         
 
         watch([perPage, sortBy, currentPage], () => {
-            saveState();
+            updateURL();
             getPosts();
         }, { immediate: false });
 
+
         onMounted(() => {
-            loadState();
+            loadStateFromURL();
             getPosts();
         });
 
