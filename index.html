@@ -30,7 +30,7 @@
 
     <section class="post" id="app">
         <div class="post-header">
-            <div>Showing {{ currentPage }} - {{ perPage.value }} of {{ totalPages.value }}</div>
+            <div>Showing {{ ((currentPage-1) * perPage) + 1}} - {{ lastItem }} of {{ totalPages }}</div>
             <div class="post-filter">
                 <label for="post-per-page">Post per page</label>
                 <select name="post-per-page" id="post-per-page" v-model="perPage">
@@ -61,14 +61,11 @@
         </div>
         <div class="post-pagination">
             <ul class="pagination">
-                <li><a href="">«</a></li>
-                <li><a href="">‹</a></li>
-                <li><a href="" class="active">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">›</a></li>
-                <li><a href="">»</span></a></li>
+                <li><a href="" @click="setCurrentPage(1)">«</a></li>
+                <li v-for="page in pages" :key="page">
+                    <a href="" @click="setCurrentPage(page)" :class="{ 'active': page == currentPage }">{{ page }}</a>
+                </li>
+                <li><a href="" @click="setCurrentPage(Math.ceil(totalPages / perPage))">»</span></a></li>
             </ul>
         </div>
 
