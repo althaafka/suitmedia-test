@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suitmedia</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 <body>
     <nav>
@@ -28,35 +28,51 @@
         </div>
     </section>
 
-    <section class="post">
+    <section class="post" id="app">
         <div class="post-header">
-            <div>Showing 1 - 10 of 100</div>
+            <div>Showing {{ currentPage }} - {{ perPage.value }} of {{ totalPages.value }}</div>
             <div class="post-filter">
                 <label for="post-per-page">Post per page</label>
-                <select name="post-per-page" id="post-per-page">
+                <select name="post-per-page" id="post-per-page" v-model="perPage">
                     <option value="10">10</option>
                     <option value="20">20</option>
-                    <option value="30">50</option>
+                    <option value="50">50</option>
                 </select>
 
                 <label for="sort">Sort by</label>
-                <select name="sort" id="sort">
+                <select name="sort" id="sort" v-model="sortBy">
                     <option value="newest">Newest</option>
                     <option value="oldest">Oldest</option>
                 </select>
             </div>
         </div>
-        <div class="post-container">
-            <div class="card">
-                <div class="image-container">
-                    <img src="assets/card1.jpg">
-                </div>
-                <div class="card-text">
-                    <div>5 SEPTEMBER 2022</div>
-                    <h2>Jangan Asal Pilih Influencer, Berikut Cara Menyusun Strategi Influencer yang Benar</h2>
-                </div>
-            </div>
+        <div class="post-container" v-if="posts">
+            <card
+                v-for="post in posts"
+                :key="post.id"
+                :title="post.title"
+                :date="post.date"
+                :image="post.image"
+            >
+        </card>
         </div>
+        <div v-else>
+            <p>Loading...</p>
+        </div>
+        <div class="post-pagination">
+            <ul class="pagination">
+                <li><a href="">«</a></li>
+                <li><a href="">‹</a></li>
+                <li><a href="" class="active">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">›</a></li>
+                <li><a href="">»</span></a></li>
+            </ul>
+        </div>
+
     </section>
+    <script src="app.js"></script>
 </body>
 </html>

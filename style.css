@@ -27,13 +27,13 @@ nav {
 nav img {
     max-height: 50px;
     width: auto;
-    margin-left: 150px;
+    margin-left: 100px;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    margin-right: 150px;
+    margin-right: 100px;
 }
 
 nav li {
@@ -99,7 +99,7 @@ nav a:hover::before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 150px;
+    margin: 20px 100px;
     /* background-color: wheat; */
     /* border: 1px solid silver; */
 }
@@ -109,14 +109,14 @@ nav a:hover::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     width: 100%;
 }
 
 .post-header select {
     appearance: none;
     -webkit-appearance: none;
-    width: 130px;
+    width: 120px;
     padding: 10px 20px;
     font-size: large;
     border: 1px solid silver;
@@ -128,7 +128,7 @@ nav a:hover::before {
 .post-container {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 50px;
     padding: 20px;
     justify-items: center;
@@ -138,16 +138,21 @@ nav a:hover::before {
     min-height: fit-content;
     display: flex;
     flex-direction: column;
-    width: 22rem;
+    width: 16rem;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
+.card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
+}
+
 .image-container {
     overflow: hidden;
     width: 100%;
-    height: 250px;
+    height: 160px;
     background-color: rgb(183, 183, 183);
     border-radius: 1rem 1rem 0 0;
 }
@@ -159,10 +164,57 @@ nav a:hover::before {
 }
 
 .card-text {
-    padding: 1.5rem;
+    padding: 1.2rem;
 }
 
 .card-text :first-child {
-    margin-bottom: 10px;
-    opacity: 0.8;
+    margin-bottom: 5px;
+    opacity: 0.5;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.card-text h2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    display: flex;
+}
+
+
+.pagination a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid silver; */
+    border-radius: 10px;
+    width: 35px;
+    height: 40px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    margin: 0 3px;
+}
+
+.pagination a:hover {
+    background-color: var(--orange);
+    color: white;
+}
+
+.pagination a.active {
+    background-color: var(--orange);
+    color: white;
 }
