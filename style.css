@@ -247,3 +247,14 @@ nav a.active::before {
     background-color: var(--orange);
     color: white;
 }
+
+@media screen and (max-width: 800px) {
+    .post {
+        margin: 20px 20px;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+}
