@@ -32,18 +32,22 @@
         <div class="post-header">
             <div>Showing {{ ((currentPage-1) * perPage) + 1}} - {{ lastItem }} of {{ totalPages }}</div>
             <div class="post-filter">
-                <label for="post-per-page">Post per page</label>
-                <select name="post-per-page" id="post-per-page" v-model="perPage">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
+                <div class="select-container">
+                    <label for="post-per-page">Post per page</label>
+                    <select name="post-per-page" id="post-per-page" v-model="perPage">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
 
-                <label for="sort">Sort by</label>
-                <select name="sort" id="sort" v-model="sortBy">
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                </select>
+                <div class="select-container">
+                    <label for="sort">Sort by</label>
+                    <select name="sort" id="sort" v-model="sortBy">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="post-container" v-if="posts">
